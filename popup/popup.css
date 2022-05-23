@@ -1,28 +1,19 @@
 body {
-  height: 400px;
+  /* height: 500px; */
   width: 600px;
   background-color: var(--bs-purple);
   color: whitesmoke;
-  /* margin: 0; */
-  /* padding: 0px 10px 10px 10px; */
 }
 
 .header {
-  /* display: flexbox; */
   justify-content: center;
-  /* height: 40px; */
-  background-color: whitesmoke;
-  /* margin: -30px -10px -10px -10px; */
-  /* padding: 30px 5px 5px 5px; */
 }
 
 .header h1 {
-  text-align: center;
-  font-size: 2em;
-  color: var(--bs-purple);
+  color: var(--bs-purple) !important;
 }
 
-p {
-  color: whitesmoke;
-  font-size: 1.2em;
+.even-row {
+  background-color: #7747d0;
+  /* opacity: 0.5; */
 }

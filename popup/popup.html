@@ -6,21 +6,30 @@
   <title>Navigation Timer</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 </head>
 
 <body>
-
- <div class="bg-white p-1">
-  <h1 class="display-3 text-center text-black">Navigation Timer</h1> 
+ <div class="bg-light bg-opacity-75 header p-1 shadow-lg">
+  <h1 class="display-5 text-center text-black fw-bold text-opacity-75">Navigation Timer</h1> 
  </div>
 
- <div class="p-3">
-    <div class="row">
-      <div class="col-8">Site</div>
-      <div class="col">Time spent</div>
+ <div class="p-0 mx-2">
+    <div class="row bg-light bg-opacity-75 shadow-lg mb-2 p-2 fw-bold" style="color: var(--bs-purple)">
+      <div class="col"></div>
+      <div class="col-7 justify-left">Site</div>
+      <div class="col-3 text-center">Time spent</div>
+      <div class="col"></div>
     </div>
-    <div id="report-container">
+    <div id="report-container" class="m-0 p-0">
     </div>
+ </div>
+
+ <div class="row my-3">
+   <div id="timer-caption" class="col-9 text-center"></div>
+   <div class="col-3">
+    <button id="btn-reset" class="btn btn-sm btn-outline-light">Reset Timer <i class="bi bi-clock"></i></button>
+   </div>
  </div>
 
 </body>

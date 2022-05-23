@@ -17,5 +17,11 @@
   "background": {
     "service_worker": "background.js"
   },
-  "options_page": "options/options.html"
+  "options_page": "options/options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ]
 }
