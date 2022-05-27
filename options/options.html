@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Navigation Timer Options</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="options.css" type="text/css" media="all">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-    <body></body>
+    <link rel="stylesheet" href="/font/bootstrap-icons.css">
   </head>
   <body style="background-color: var(--bs-gray-400);">
     <h1 class="display-5 text-center p-3">Navigation Timer Options</h1>
@@ -16,19 +15,33 @@
     <!-- Timer Cycle -->
     <div class="container mb-3 shadow p-3 bg-white rounded-4">
       <h3>Timer Cycle</h3>
-      <h5 class="text-black text-opacity-50">Determine the timer cycle. Both report and restrictions will reset after this period.</h5>
-      <div class="mt-4">
-        <input type="text" id="input-cycle" placeholder="00:00:00" class="text-end pr-1" maxlength="8">
-        <label class="opacity-25">(hh:mm:ss)</label>
-        <!-- <button id="btn-cycle" class="btn btn-sm btn-dark">Save</button> -->
+      <h5 class="text-black text-opacity-50">Determine the timer cycle. Both report and restrictions will reset after this period. Time limit will block a site when determined time is reach.</h5>
+      <div class="mt-4 d-flex justify-content-between mx-40">
+        <div>
+          <div class="d-flex align-items-center">
+            <input type="text" id="input-cycle" placeholder="00:00:00" class="text-end pr-1" maxlength="8">
+            <button id="btn-cycle" class="btn btn-sm btn-secondary">Save</button>
+          </div>
+          <label class="opacity-25">Duration of each cycle (hh:mm:ss)</label>
+        </div>
+        <div>
+          <div class="d-flex align-items-center">
+            <input type="text" id="input-limit" placeholder="00:00:00" class="text-end pr-1" maxlength="8">
+            <button id="btn-limit" class="btn btn-sm btn-secondary">Save</button>
+          </div>
+          <label class="opacity-25">Time limit of a restricted site (hh:mm:ss)</label>
+        </div>
       </div>
     </div>
+
+    <div id="status-message" class="container"></div>
+
     <!-- Exceptions -->
     <div class="container mb-3 shadow p-3 bg-white rounded-4">
       <h3>Exceptions</h3>
-      <h5 class="text-black text-opacity-50">Domains or hostnames to not track</h5>
+      <h5 class="text-black text-opacity-50">Domains or hostnames to not track.</h5>
       <div id="exceptions-container"></div>
-      <div class="mt-4">
+      <div class="d-flex mt-4">
         <input type="text" id="input-exception" placeholder="Add a domain exception here">
         <button id="btn-exception" class="btn btn-sm btn-secondary">Add</button>
       </div>
@@ -37,15 +50,34 @@
     <!-- Restrictions -->
     <div class="container mb-3 shadow p-3 bg-white rounded-4">
       <h3>Restrict use</h3>
-      <h5 class="text-black text-opacity-50">Domains or hostnames to block/restrict</h5>
+      <h5 class="text-black text-opacity-50">Domains or hostnames to block/restrict if time limit is reach.</h5>
       <div id="restrictions-container"></div>
-      <div class="mt-4">
+      <div class="d-flex mt-4">
         <input type="text" id="input-restriction" placeholder="Add a domain restriction here">
         <button id="btn-restriction" class="btn btn-sm btn-secondary">Add</button>
       </div>
     </div>
 
-    <script src="options.js"></script>
+  <!-- Modal -->
+  <div class="modal fade" id="pageModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-confirm" id="modalConfirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script type="module" src="options.js"></script>
 </html>

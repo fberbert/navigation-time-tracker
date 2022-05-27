@@ -1,3 +1,5 @@
+import { timerReset } from './common-functions.js'
+
 chrome.runtime.onInstalled.addListener(() => {
   // initialize an empty domains dict on INSTALL
   // { 'domainname': counterValue }
@@ -12,8 +14,9 @@ chrome.runtime.onInstalled.addListener(() => {
   // timestamp of the begining of timer
   const startTimer = new Date().getTime()
   const cycle = 86399 // 24 hours
+  const limit = 1500 // 25 minutes
   chrome.storage.local.set({
-    domains, startTimer, cycle, exceptions, restrictions,
+    domains, startTimer, cycle, exceptions, restrictions, limit,
   })
 })
 
@@ -22,13 +25,11 @@ chrome.alarms.create('navigationTimer', {
   periodInMinutes: 1 / 60,
 })
 
-// global variables
-
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'navigationTimer') {
-    chrome.storage.local.get(['startTimer', 'domains', 'cycle', 'exceptions', 'restrictions'], (r) => {
+    chrome.storage.local.get(['startTimer', 'domains', 'cycle', 'exceptions', 'restrictions', 'limit'], (r) => {
       const {
-        startTimer, domains, cycle, exceptions, restrictions,
+        startTimer, domains, cycle, exceptions, restrictions, limit,
       } = r
       const currentTimer = parseInt(((new Date().getTime()) - startTimer) / 1000, 10)
 
@@ -42,11 +43,29 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         chrome.windows.getCurrent(null, (w) => {
           if (w.focused === true) {
             // run only if chrome windows is focused
-            chrome.tabs.query({ active: true, lastFocusedWindow: true }, (t) => {
+            chrome.tabs.query({
+              active: true,
+              lastFocusedWindow: true,
+              currentWindow: true,
+            }, (t) => {
               try {
                 if (typeof t !== 'undefined') {
+                  const domain = new URL(t[0].url).hostname
                   // tab must be defined
-                  timerIncrement(t[0].url, domains, exceptions)
+                  timerIncrement(domain, domains, exceptions)
+
+                  // console.log(`estou aqui domain  = ${domain}`)
+                  // console.log(restrictions)
+                  // check restrictions
+                  if (restrictions.includes(domain)) {
+                    // check if currentTimer is greater than limit
+                    const domainTimer = domains[domain]
+                    console.log(`limit is ${limit} and domain timer is ${domainTimer}`)
+                    if (domainTimer >= limit) {
+                      // console.log('BLOQUEAR')
+                      chrome.tabs.sendMessage(t[0].id, { action: 'block' }, (res) => {})
+                    }
+                  }
                 }
               } catch (err) {
                 console.log(err)
@@ -64,7 +83,8 @@ function timerIncrement(url, domains, exceptions) {
   //
   try {
     // retrieve only the hostname in the current tab url
-    const { hostname } = new URL(url)
+    // const { hostname } = new URL(url)
+    const hostname = url
 
     // check restrictions here
     //
@@ -79,16 +99,8 @@ function timerIncrement(url, domains, exceptions) {
     }
 
     chrome.storage.local.set({ domains })
-    // console.log(`salvei domains: ${currentTimer}`)
-    // console.log(domains)
+    // console.log(`salvei domains: ${hostname} - ${domains[hostname]}`)
   } catch (err) {
     console.log(`error trying to update navigationTimer: ${err}`)
   }
-}
-
-function timerReset() {
-  const domains = {}
-  const startTimer = new Date().getTime()
-  console.log(`timerReset grave ${startTimer}`)
-  chrome.storage.local.set({ domains, startTimer })
 }
