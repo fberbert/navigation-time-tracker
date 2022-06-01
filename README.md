@@ -1,6 +1,8 @@
 # navigation-time-tracker
 
-<img src="icon.png" width="180" height="180">
+<p align="center">
+  <img src="icon.png" width="180" height="180">
+ </p>
 
 Navigation Time Tracker will track the time you spend on each visited website. You will be able to determine which ones you want to restrict the use and the limit of time you will be allowed to navigate on them. For example: for every 24 hours, I want to be able to navigate no more than 30 minutes on Facebook. The extension will block the site when you reach those 30 minutes. 
 
