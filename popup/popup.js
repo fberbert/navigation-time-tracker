@@ -1,4 +1,11 @@
-import { timerReset, removeDomain, secondsFormat, addException, addRestriction, removeRestriction } from '../common-functions.js'
+import {
+  timerReset,
+  removeDomain,
+  secondsFormat,
+  addException,
+  addRestriction,
+  removeRestriction,
+} from '../common-functions.js'
 
 const reportContainer = document.getElementById('report-container')
 const timerCaption = document.getElementById('timer-caption')
