@@ -8,15 +8,15 @@ Navigation Time Tracker will track the time you spend on each visited website. Y
 
 ## Installation Instructions
 
-1. Clone this repository with:
+1 - Clone this repository with:
 
 `git clone https://github.com/fberbert/navigation-time-tracker`
 
 Or download and extract the code ZIP.
 
-2. Open your **Chrome browser** and type in the URL address bar: **chrome://extensions**
+2 - Open your **Chrome browser** and type in the URL address bar: **chrome://extensions**
 
-3. Click on the **Load unpacked** button, navigate into the directory of this extension code and confirm.
+3 - Click on the **Load unpacked** button, navigate into the directory of this extension code and confirm.
 
 Job done! **Navigation Timer Tracker** is installed. You can access it through the timer icon in the extensions bar. 
 
